@@ -3,11 +3,14 @@ package com.rodrigmatrix.gabrielsserialcontroller.ui.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.rodrigmatrix.gabrielsserialcontroller.ui.bluetooth.PosPrinter60mm
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel(
+    private val bluetoothService: PosPrinter60mm
+) : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+    fun getBluetoothService(): PosPrinter60mm{
+        return bluetoothService
     }
-    val text: LiveData<String> = _text
+
 }

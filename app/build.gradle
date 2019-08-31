@@ -36,45 +36,46 @@ dependencies {
     def material_version = '1.1.0-alpha09'
     def core_version = '1.0.2'
     def anko_version = '0.10.8'
-
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "androidx.appcompat:appcompat:$app_compact_version"
     implementation "androidx.appcompat:appcompat-resources:$app_compact_version"
     implementation "androidx.core:core-ktx:$core_version"
     implementation "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
 
-// Navigation
+    // Navigation
     implementation "androidx.navigation:navigation-fragment:$nav_version_ktx"
     implementation "androidx.navigation:navigation-ui:$nav_version_ktx"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version_ktx"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version_ktx"
 
-// Anko
+    // Anko
     implementation "org.jetbrains.anko:anko:$anko_version"
 
-// Room
+    // Room
     implementation "androidx.room:room-runtime:$room_version"
-    implementation "androidx.legacy:legacy-support-v4:1.0.0"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0'
     kapt "androidx.room:room-compiler:$room_version"
+    implementation 'org.kodein.di:kodein-di-generic-jvm:6.3.3'
+    implementation 'org.kodein.di:kodein-di-framework-android-x:6.3.3'
 
-    implementation "org.kodein.di:kodein-di-generic-jvm:6.3.3"
-    implementation "org.kodein.di:kodein-di-framework-android-x:6.3.3"
-
-// Kotlin Coroutines
+    // Kotlin Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.1'
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.1"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.1'
 
-// Preference
-    implementation "androidx.preference:preference:1.1.0-rc01"
+    // Preference
+    implementation 'androidx.preference:preference:1.1.0-rc01'
 
-// Material Components
+    // Color picker
+    implementation 'com.github.duanhong169:colorpicker:1.1.6'
+    implementation 'com.larswerkman:HoloColorPicker:1.5'
+
+    // Material Components
     implementation "com.google.android.material:material:$material_version"
-
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
