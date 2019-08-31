@@ -68,7 +68,7 @@ public class BTService {
     private final Context context;
 
     private int state;
-    private BTCallback btCallback;
+    public BTCallback btCallback;
     private DeviceCallbacks deviceCallbacks;
 
     public BTService(Context context, Handler handler) {
@@ -154,7 +154,6 @@ public class BTService {
 
             r = this.listenThread;
         }
-
         r.send(out);
     }
 
@@ -466,6 +465,7 @@ public class BTService {
             try {
                 outStream.write(buffer);
                 sendMessage(MESSAGE_WRITE, buffer.length, buffer);
+                System.out.println("enviou");
             } catch (IOException ignored) {
             }
         }

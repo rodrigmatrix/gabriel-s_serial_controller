@@ -22,17 +22,23 @@ import com.rodrigmatrix.gabrielsserialcontroller.R
 import com.rodrigmatrix.gabrielsserialcontroller.ui.bluetooth.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.jetbrains.anko.support.v4.act
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
+import kotlin.coroutines.CoroutineContext
 
 
-
-class HomeFragment : Fragment(), KodeinAware {
+class HomeFragment : Fragment(), KodeinAware, CoroutineScope {
 
     private lateinit var viewModel: HomeViewModel
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main
     override val kodein by closestKodein()
     private val viewModelFactory: HomeViewModelFactory by instance()
 
@@ -49,15 +55,25 @@ class HomeFragment : Fragment(), KodeinAware {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        val btService = viewModel.getBluetoothService()
+        btService.changeActivity(activity)
         picker.addSVBar(svbar)
         picker.addOpacityBar(opacitybar)
         picker.setOnColorChangedListener {
             val rgb = Color.valueOf(it)
             println(rgb)
+            launch{
+                btService.send("r ${rgb.red() }".toByteArray())
+                delay(20)
+                btService.send("g ${rgb.green() }".toByteArray())
+                delay(20)
+                btService.send("b ${rgb.blue() }".toByteArray())
+                delay(20)
+            }
         }
-        val btService = viewModel.getBluetoothService()
-        btService.changeActivity(activity)
-
+        piscar_button.setOnClickListener {
+            btService.send("p".toByteArray())
+        }
         if(btService.isConnected){
             setView(true)
         }
