@@ -12,8 +12,8 @@
     <color name="Red">#cf6679</color>
     <color name="bluetooth_divider">#FDDD</color>
     <color name="bluetooth_highlight">#FAAA</color>
-    <color name="bluetooth_text_primary">#F000</color>
-    <color name="bluetooth_text_secondary">#FF323232</color>
+    <color name="bluetooth_text_primary">#FFFFFF</color>
+    <color name="bluetooth_text_secondary">#FFFFFF</color>
     <color name="Yellow">#fff356</color>
     <color name="Green">#36f725</color>
     <color name="Orange">#f2851f</color>

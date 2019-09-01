@@ -13,5 +13,13 @@
     <string name="pos_title_choose_printer">Choose printer</string>
     <string name="pos_title_connecting_to">Connecting to</string>
 
+
+    <string name="light_string">Claro</string>
+    <string name="dark_string">Escuro</string>
+    <string name="battery_saver_string">Economia de Bateria</string>
+    <string name="system_default_string">Padrão do Sistema</string>
+    <string name="appearance_string">Aparência</string>
+    <string name="theme_string">Tema</string>
+
     <string name="home_second">Home Second</string>
 </resources>

@@ -465,7 +465,6 @@ public class BTService {
             try {
                 outStream.write(buffer);
                 sendMessage(MESSAGE_WRITE, buffer.length, buffer);
-                System.out.println("enviou");
             } catch (IOException ignored) {
             }
         }

@@ -1,6 +1,7 @@
 package com.rodrigmatrix.gabrielsserialcontroller
 
 import android.app.Application
+import androidx.preference.PreferenceManager
 import com.rodrigmatrix.gabrielsserialcontroller.ui.bluetooth.PosPrinter60mm
 import com.rodrigmatrix.gabrielsserialcontroller.ui.home.HomeViewModel
 import com.rodrigmatrix.gabrielsserialcontroller.ui.home.HomeViewModelFactory
@@ -22,5 +23,10 @@ class SerialApplication: Application(), KodeinAware {
         bind() from provider {
             HomeViewModelFactory(bluetoothService = instance())
         }
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
     }
 }

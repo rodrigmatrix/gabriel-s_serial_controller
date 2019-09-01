@@ -1,37 +1,29 @@
 package com.rodrigmatrix.gabrielsserialcontroller.ui.home
 
-import android.bluetooth.BluetoothDevice
-import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.os.Trace.isEnabled
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.snackbar.Snackbar
-import com.rodrigmatrix.gabrielsserialcontroller.MainActivity
 import com.rodrigmatrix.gabrielsserialcontroller.R
 import com.rodrigmatrix.gabrielsserialcontroller.ui.bluetooth.*
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.jetbrains.anko.support.v4.act
-import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 import kotlin.coroutines.CoroutineContext
+
+
 
 
 class HomeFragment : Fragment(), KodeinAware, CoroutineScope {
@@ -52,27 +44,25 @@ class HomeFragment : Fragment(), KodeinAware, CoroutineScope {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val btService = viewModel.getBluetoothService()
         btService.changeActivity(activity)
-        picker.addSVBar(svbar)
-        picker.addOpacityBar(opacitybar)
+        var r = 100
+        var g = 100
+        var b = 100
         picker.setOnColorChangedListener {
-            val rgb = Color.valueOf(it)
-            println(rgb)
-            launch{
-                btService.send("r ${rgb.red() }".toByteArray())
-                delay(20)
-                btService.send("g ${rgb.green() }".toByteArray())
-                delay(20)
-                btService.send("b ${rgb.blue() }".toByteArray())
-                delay(20)
-            }
+            r = Color.red(it)
+            g = Color.green(it)
+            b = Color.blue(it)
         }
         piscar_button.setOnClickListener {
-            btService.send("p".toByteArray())
+            btService.send("{".toByteArray())
+        }
+        pick_button.setOnClickListener {
+            btService.send("r $r".toByteArray())
+            btService.send("g $g".toByteArray())
+            btService.send("b $b".toByteArray())
         }
         if(btService.isConnected){
             setView(true)
